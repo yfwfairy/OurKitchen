@@ -6,13 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/viewPager">
+    </androidx.viewpager.widget.ViewPager>
+
+    <nl.joery.animatedbottombar.AnimatedBottomBar
+        android:id="@+id/bottomTabBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:abb_indicatorAppearance="round"
+        app:abb_selectedIndex="1"
+        app:abb_selectedTabType="icon"
+        app:abb_tabColorSelected="@color/themeColor"
+        app:abb_tabs="@menu/tabs"
+        app:abb_tabColor="@color/defaultColor"
+        app:abb_indicatorColor="@color/themeColor"
+
+        app:abb_textAppearance="@style/tabItemText"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_rec"
+        android:icon="@drawable/rec"
+        android:title="@string/rec_tab" />
+    <item
+        android:id="@+id/tab_note"
+        android:icon="@drawable/note"
+        android:title="@string/note_tab" />
+    <item
+        android:id="@+id/tab_find"
+        android:icon="@drawable/find"
+        android:title="@string/find_tab" />
+</menu>

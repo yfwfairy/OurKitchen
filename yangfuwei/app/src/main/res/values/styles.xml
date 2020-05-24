@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="tabItemText">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">14sp</item>
+<!--        <item name="android:textStyle">bold</item>-->
+    </style>
+
 </resources>
