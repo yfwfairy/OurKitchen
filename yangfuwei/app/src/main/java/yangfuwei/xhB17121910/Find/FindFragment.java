@@ -1,4 +1,4 @@
-package yangfuwei.xhB17121910;
+package yangfuwei.xhB17121910.Find;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -12,24 +12,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class NoteFragment extends Fragment {
+import yangfuwei.xhB17121910.R;
 
-    private NoteViewModel mViewModel;
+public class FindFragment extends Fragment {
 
-    public static NoteFragment newInstance() {
-        return new NoteFragment();
+    private FindViewModel mViewModel;
+
+    public static FindFragment newInstance() {
+        return new FindFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.note_fragment, container, false);
+        return inflater.inflate(R.layout.find_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(FindViewModel.class);
         // TODO: Use the ViewModel
     }
 

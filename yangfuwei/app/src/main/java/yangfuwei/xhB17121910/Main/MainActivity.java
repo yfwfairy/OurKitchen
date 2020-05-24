@@ -1,4 +1,4 @@
-package yangfuwei.xhB17121910;
+package yangfuwei.xhB17121910.Main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,10 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import nl.joery.animatedbottombar.AnimatedBottomBar;
+import yangfuwei.xhB17121910.Find.FindFragment;
+import yangfuwei.xhB17121910.Note.NoteFragment;
+import yangfuwei.xhB17121910.R;
+import yangfuwei.xhB17121910.Recommend.RecommendFragment;
 
 public class MainActivity extends AppCompatActivity {
 

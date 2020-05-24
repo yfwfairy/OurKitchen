@@ -1,4 +1,4 @@
-package yangfuwei.xhB17121910;
+package yangfuwei.xhB17121910.Note;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -11,24 +11,27 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-public class RecommendFragment extends Fragment {
+import yangfuwei.xhB17121910.R;
 
-    private RecommendViewModel mViewModel;
+public class NoteFragment extends Fragment {
 
+    private NoteViewModel mViewModel;
+
+    public static NoteFragment newInstance() {
+        return new NoteFragment();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.recommend_fragment, container, false);
-        return view;
+        return inflater.inflate(R.layout.note_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(RecommendViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
         // TODO: Use the ViewModel
     }
 
