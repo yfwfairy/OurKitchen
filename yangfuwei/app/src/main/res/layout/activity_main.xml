@@ -7,26 +7,28 @@
     tools:context=".Main.MainActivity"
     android:orientation="vertical">
 
-    <androidx.viewpager.widget.ViewPager
+    <yangfuwei.xhB17121910.Main.MyViewPager
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/viewPager">
-    </androidx.viewpager.widget.ViewPager>
+    </yangfuwei.xhB17121910.Main.MyViewPager>
 
-    <nl.joery.animatedbottombar.AnimatedBottomBar
+    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
         android:id="@+id/bottomTabBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:abb_indicatorAppearance="round"
-        app:abb_selectedIndex="1"
-        app:abb_selectedTabType="icon"
-        app:abb_tabColorSelected="@color/themeColor"
-        app:abb_tabs="@menu/tabs"
-        app:abb_tabColor="@color/defaultColor"
-        app:abb_indicatorColor="@color/themeColor"
+        app:menu="@menu/tabs"
+        />
+<!--        app:abb_indicatorAppearance="round"-->
+<!--        app:abb_selectedIndex="1"-->
+<!--        app:abb_selectedTabType="icon"-->
+<!--        app:abb_tabColorSelected="@color/themeColor"-->
+<!--        app:abb_tabs="@menu/tabs"-->
+<!--        app:abb_tabColor="@color/defaultColor"-->
+<!--        app:abb_indicatorColor="@color/themeColor"-->
 
-        app:abb_textAppearance="@style/tabItemText"
-        app:layout_constraintBottom_toBottomOf="parent" />
+<!--        app:abb_textAppearance="@style/tabItemText"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent" />-->
 
 </LinearLayout>

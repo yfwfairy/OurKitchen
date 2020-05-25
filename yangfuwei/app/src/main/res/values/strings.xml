@@ -3,4 +3,9 @@
     <string name="rec_tab">"推荐"</string>
     <string name="note_tab">"记录"</string>
     <string name="find_tab">"发现"</string>
+    <string name="me_tab">"我的"</string>
+    <string name="others_tab">朋友</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

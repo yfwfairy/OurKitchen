@@ -8,7 +8,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import nl.joery.animatedbottombar.AnimatedBottomBar;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
 import yangfuwei.xhB17121910.Find.FindFragment;
 import yangfuwei.xhB17121910.Note.NoteFragment;
 import yangfuwei.xhB17121910.R;
@@ -16,15 +17,17 @@ import yangfuwei.xhB17121910.Recommend.RecommendFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    AnimatedBottomBar bottomTabBar;
+    BottomNavigationViewEx bottomTabBar;
 
-    ViewPager mViewPager;
+    MyViewPager mViewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomTabBar = findViewById(R.id.bottomTabBar);
+
         mViewPager = findViewById(R.id.viewPager);
+        mViewPager.setCanSlide(false);
         mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @NonNull
             @Override

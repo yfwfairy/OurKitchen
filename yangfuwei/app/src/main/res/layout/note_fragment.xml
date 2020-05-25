@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Note.NoteFragment">
-
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Note.NoteFragment"
+    android:orientation="vertical">
+    <nl.joery.animatedbottombar.AnimatedBottomBar
+        android:id="@+id/tabbar_note"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="note" />
+        app:abb_tabs="@menu/notetabs">
+    </nl.joery.animatedbottombar.AnimatedBottomBar>
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/note_viewpager"
+        android:layout_weight="1">
+    </androidx.viewpager.widget.ViewPager>
 
-</FrameLayout>
+
+</LinearLayout>
