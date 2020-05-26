@@ -1,5 +1,6 @@
 package yangfuwei.xhB17121910.Note;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -69,7 +70,8 @@ public class MyNoteFragment extends Fragment {
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("click");
+                Intent intent = new Intent(getContext(),EditNoteActivity.class);
+                startActivityForResult(intent,1);
             }
         });
 
