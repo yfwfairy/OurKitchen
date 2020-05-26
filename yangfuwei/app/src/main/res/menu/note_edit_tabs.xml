@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_checklist"
+        android:icon="@drawable/checklist"
+        android:checked="false"
+        android:title="清单" />
+    <item
+        android:id="@+id/tab_font"
+        android:icon="@drawable/font"
+        android:title="字体" />
+    <item
+        android:id="@+id/tab_image"
+        android:icon="@drawable/image"
+        android:title="图片" />
+</menu>

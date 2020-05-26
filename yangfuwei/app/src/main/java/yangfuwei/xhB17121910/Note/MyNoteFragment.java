@@ -44,7 +44,7 @@ public class MyNoteFragment extends Fragment {
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),EditNoteActivity.class);
+                Intent intent = new Intent(getContext(),NoteEditActivity.class);
                 startActivityForResult(intent,1);
             }
         });

@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import jp.wasabeef.richeditor.RichEditor;
 import yangfuwei.xhB17121910.R;
@@ -26,7 +29,7 @@ public class EditNoteActivity extends AppCompatActivity {
         //mEditor.setBackgroundColor(Color.BLUE);
         //mEditor.setBackgroundResource(R.drawable.bg);
         mEditor.setPadding(10, 10, 10, 10);
-        //mEditor.setBackground("https://raw.githubusercontent.com/wasabeef/art/master/chip.jpg");
+//        mEditor.setBackground("http://www.1honeywan.com/dachshund/image/7.21/7.21_3_thumb.JPG");
         mEditor.setPlaceholder("Insert text here...");
         //mEditor.setInputEnabled(false);
 

@@ -6,5 +6,6 @@
     <color name="themeColor">#E65100</color>
     <color name="defaultColor">#707070</color>
     <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
     <color name="splitColor">#DDDDDD</color>
 </resources>

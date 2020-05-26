@@ -30,6 +30,14 @@
                 />
 
             <ImageButton
+                android:id="@+id/action_subscript"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@null"
+                android:contentDescription="@null"
+                android:src="@drawable/subscript" />
+
+            <ImageButton
                 android:id="@+id/action_redo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -54,15 +62,6 @@
                 android:background="@null"
                 android:contentDescription="@null"
                 android:src="@drawable/italic"
-                />
-
-            <ImageButton
-                android:id="@+id/action_subscript"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/subscript"
                 />
 
             <ImageButton
@@ -287,5 +286,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageview">
+    </ImageView>
 
 </LinearLayout>
