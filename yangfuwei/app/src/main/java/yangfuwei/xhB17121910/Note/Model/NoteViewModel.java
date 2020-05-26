@@ -1,4 +1,4 @@
-package yangfuwei.xhB17121910.Note;
+package yangfuwei.xhB17121910.Note.Model;
 
 import androidx.lifecycle.ViewModel;
 

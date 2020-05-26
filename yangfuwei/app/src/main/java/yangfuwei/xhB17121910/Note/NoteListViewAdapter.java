@@ -13,14 +13,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import yangfuwei.xhB17121910.Note.Model.NoteModel;
 import yangfuwei.xhB17121910.R;
-import yangfuwei.xhB17121910.Recommend.RecommendListModel;
 
 public class NoteListViewAdapter implements ListAdapter {
     private Context mContext;
-    private List<RecommendListModel> articleList;
+    private List<NoteModel> articleList;
 
-    public NoteListViewAdapter(Context _context, List<RecommendListModel> _listModel) {
+    public NoteListViewAdapter(Context _context, List<NoteModel> _listModel) {
         mContext = _context;
         if (_listModel == null) {
             articleList = new ArrayList<>();
@@ -36,7 +36,7 @@ public class NoteListViewAdapter implements ListAdapter {
 
     @Override
     public boolean isEnabled(int i) {
-        return false;
+        return true;
     }
 
     @Override
@@ -76,21 +76,19 @@ public class NoteListViewAdapter implements ListAdapter {
             viewHolder = (ViewHolder) view.getTag();
         } else {
             viewHolder = new ViewHolder();
-            view = LayoutInflater.from(mContext).inflate(R.layout.recommend_list_item,null,true);
+            view = LayoutInflater.from(mContext).inflate(R.layout.mynote_list_item,null,true);
             viewHolder.titleTxv = view.findViewById(R.id.title);
-            viewHolder.authorTxv = view.findViewById(R.id.author);
+            viewHolder.timeTxv = view.findViewById(R.id.time);
             viewHolder.mImageView = view.findViewById(R.id.image);
-            viewHolder.sharedByTxv = view.findViewById(R.id.sharedByWho);
             view.setTag(viewHolder);
         }
-        RecommendListModel model = articleList.get(i);
+        NoteModel model = articleList.get(i);
         if (model != null) {
             viewHolder.titleTxv.setText(model.getTitle());
-            viewHolder.authorTxv.setText(model.getAuther());
+            viewHolder.timeTxv.setText(model.getAuther());
             if(model.getImageUrl() != null && model.getImageUrl().length() != 0) {
                 viewHolder.mImageView.setImageURI(Uri.parse(model.getImageUrl()));
             }
-            viewHolder.sharedByTxv.setText(model.getSharedByWho());
         }
         return view;
     }
@@ -112,8 +110,7 @@ public class NoteListViewAdapter implements ListAdapter {
 
     private final class ViewHolder {
         public TextView titleTxv;
-        public TextView authorTxv;
-        public TextView sharedByTxv;
+        public TextView timeTxv;
         public ImageView mImageView;
     }
 }

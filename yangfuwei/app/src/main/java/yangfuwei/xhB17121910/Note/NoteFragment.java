@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import nl.joery.animatedbottombar.AnimatedBottomBar;
+import yangfuwei.xhB17121910.Note.Model.NoteViewModel;
 import yangfuwei.xhB17121910.R;
 
 public class NoteFragment extends Fragment {

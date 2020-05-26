@@ -1,17 +1,15 @@
 package yangfuwei.xhB17121910.Recommend;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,16 +28,16 @@ public class RecommendFragment extends Fragment {
         View view = inflater.inflate(R.layout.recommend_fragment, container, false);
         mListView = view.findViewById(R.id.rec_listview);
         initLocalData();
-        mListView.setAdapter(new RecommendListViewAdapter(getContext(),articleList));
+        mListView.setAdapter(new RecommendListViewAdapter(getContext(), articleList));
         return view;
     }
 
     public void initLocalData() {
         articleList = new ArrayList<>();
-        for (int i = 0 ; i < 20; i++) {
-            articleList.add(new RecommendListModel(System.currentTimeMillis(),"文章标题" + i , "作者" + i , null,"分享人" + i));
+        for (int i = 0; i < 20; i++) {
+            articleList.add(new RecommendListModel(System.currentTimeMillis(), "文章标题" + i, "作者" + i, null, "分享人" + i));
         }
-}
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
