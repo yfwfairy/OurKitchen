@@ -15,6 +15,7 @@ import java.util.List;
 
 import yangfuwei.xhB17121910.Note.Model.NoteModel;
 import yangfuwei.xhB17121910.R;
+import yangfuwei.xhB17121910.Utils.DataTimeUtils;
 
 public class NoteListViewAdapter implements ListAdapter {
     private Context mContext;
@@ -27,6 +28,10 @@ public class NoteListViewAdapter implements ListAdapter {
         } else {
             articleList = _listModel;
         }
+    }
+
+    public void setNoteList(List<NoteModel> noteList) {
+        articleList = noteList;
     }
 
     @Override
@@ -85,7 +90,7 @@ public class NoteListViewAdapter implements ListAdapter {
         NoteModel model = articleList.get(i);
         if (model != null) {
             viewHolder.titleTxv.setText(model.getTitle());
-            viewHolder.timeTxv.setText(model.getAuther());
+            viewHolder.timeTxv.setText(DataTimeUtils.stampToDate(String.valueOf(model.getTime())));
             if (model.getImageUrl() != null && model.getImageUrl().length() != 0) {
                 viewHolder.mImageView.setImageURI(Uri.parse(model.getImageUrl()));
             }

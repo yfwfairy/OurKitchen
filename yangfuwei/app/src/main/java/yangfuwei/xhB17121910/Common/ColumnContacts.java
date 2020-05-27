@@ -9,5 +9,6 @@ public class ColumnContacts {
     public static final String NOTE_IMPORTANCE_COLUMN = "importance";
     public static final String NOTE_AUTHOR_COLUMN = "author";
     public static final String NOTE_IMAGE_COLUMN = "image";
+    public static final String NOTE_TYPE_COLUMN = "type";
 
 }

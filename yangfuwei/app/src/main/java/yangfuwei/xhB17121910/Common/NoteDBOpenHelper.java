@@ -14,6 +14,10 @@ public class NoteDBOpenHelper extends SQLiteOpenHelper {
         super(context, DATABASENAME, null, DATABASEVERSION);
     }
 
+    public NoteDBOpenHelper() {
+        super(OKApplication.getContext(),DATABASENAME,null,DATABASEVERSION);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         /*第一次初始化app，创建表结构 */
@@ -24,7 +28,8 @@ public class NoteDBOpenHelper extends SQLiteOpenHelper {
                 + ColumnContacts.NOTE_TIME_COLUMN + " INTEGER, "
                 + ColumnContacts.NOTE_IMPORTANCE_COLUMN + " INTEGER, "
                 + ColumnContacts.NOTE_AUTHOR_COLUMN + " text, "
-                + ColumnContacts.NOTE_IMAGE_COLUMN + " text"
+                + ColumnContacts.NOTE_IMAGE_COLUMN + " text,"
+                + ColumnContacts.NOTE_TYPE_COLUMN + " INTEGER"
                 + ")");
     }
 

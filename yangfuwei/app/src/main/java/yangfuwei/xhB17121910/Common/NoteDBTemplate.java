@@ -9,13 +9,15 @@ import android.provider.BaseColumns;
 import java.util.ArrayList;
 import java.util.List;
 
-import yangfuwei.xhB17121910.Note.NoteDBOpenHelper;
-
 public class NoteDBTemplate<T> {
     private NoteDBOpenHelper dbHelper;
 
     public NoteDBTemplate(Context context) {
         dbHelper = new NoteDBOpenHelper(context);
+    }
+
+    public NoteDBTemplate() {
+        dbHelper = new NoteDBOpenHelper();
     }
 
     public T queryOne(String sql, DBCallback<T> callback, String... args) {

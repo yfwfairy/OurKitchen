@@ -1,6 +1,10 @@
 package yangfuwei.xhB17121910.Note.Model;
 
-public class NoteModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class NoteModel implements Parcelable {
+    private int id = -1;
     private long time;
     private String title;
     private String auther;
@@ -8,6 +12,10 @@ public class NoteModel {
     private String content;
     private int importance;
     private int type;
+    public NoteModel() {
+
+    }
+
 
     public NoteModel(long time, String title, String auther, String imageUrl, String content) {
         this.time = time;
@@ -15,6 +23,54 @@ public class NoteModel {
         this.auther = auther;
         this.imageUrl = imageUrl;
         this.content = content;
+    }
+
+    protected NoteModel(Parcel in) {
+        id = in.readInt();
+        time = in.readLong();
+        title = in.readString();
+        auther = in.readString();
+        imageUrl = in.readString();
+        content = in.readString();
+        importance = in.readInt();
+        type = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeLong(time);
+        dest.writeString(title);
+        dest.writeString(auther);
+        dest.writeString(imageUrl);
+        dest.writeString(content);
+        dest.writeInt(importance);
+        dest.writeInt(type);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<NoteModel> CREATOR = new Creator<NoteModel>() {
+        @Override
+        public NoteModel createFromParcel(Parcel in) {
+            return new NoteModel(in);
+        }
+
+        @Override
+        public NoteModel[] newArray(int size) {
+            return new NoteModel[size];
+        }
+    };
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getImportance() {

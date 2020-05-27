@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -21,11 +22,12 @@ import yangfuwei.xhB17121910.R;
 public class MyNoteFragment extends Fragment {
 
 
-    private final static int REQUEST_CODE = 1;
-    private final static int RESULT_OK = 1;
+    public final static int REQUEST_CODE = 1;
+    public final static int RESULT_OK = 1;
     private FloatingActionButton mFloatingActionButton;
     private ListView myNoteListView;
     private List<NoteModel> myNoteList;
+    private NoteListViewAdapter mNoteListViewAdapter;
 
     public MyNoteFragment() {
         // Required empty public constructor
@@ -47,12 +49,24 @@ public class MyNoteFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), NoteEditActivity.class);
+                intent.putExtra("note",new NoteModel());
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
-        initLocalData();
         myNoteListView = view.findViewById(R.id.my_note_listview);
+        refreshMyNotes();
         myNoteListView.setAdapter(new NoteListViewAdapter(getContext(), myNoteList));
+        myNoteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                NoteModel noteModel = myNoteList.get(i);
+                if (noteModel != null) {
+                    Intent intent = new Intent(getContext(),NoteEditActivity.class);
+                    intent.putExtra("note",noteModel);
+                    startActivityForResult(intent,REQUEST_CODE);
+                }
+            }
+        });
         return view;
     }
 
@@ -61,16 +75,18 @@ public class MyNoteFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE) {
-                // return new item
-                // updatelist from database
+                refreshMyNotes();
+                myNoteListView.setAdapter(mNoteListViewAdapter);
             }
         }
     }
 
-    public void initLocalData() {
-        myNoteList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            myNoteList.add(new NoteModel(System.currentTimeMillis(), "笔记标题" + i, "作者" + i, null, "笔记内容" + i));
+    public void refreshMyNotes() {
+        myNoteList = NoteManager.getInstance().findAll();
+        if (mNoteListViewAdapter == null) {
+            mNoteListViewAdapter = new NoteListViewAdapter(getContext(),myNoteList);
+        } else {
+            mNoteListViewAdapter.setNoteList(myNoteList);
         }
     }
 }

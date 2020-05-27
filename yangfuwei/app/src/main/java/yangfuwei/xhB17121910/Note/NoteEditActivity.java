@@ -1,5 +1,6 @@
 package yangfuwei.xhB17121910.Note;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,11 +15,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import jp.wasabeef.richeditor.RichEditor;
+import yangfuwei.xhB17121910.Note.Model.NoteModel;
 import yangfuwei.xhB17121910.R;
 
 public class NoteEditActivity extends AppCompatActivity {
 
     private static final String TAG = "NoteEditActivity";
+    private NoteModel mNoteModel;
     private Button backButton;
     private Button redoButton;
     private Button undoButton;
@@ -31,6 +34,10 @@ public class NoteEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_edit);
+        mNoteModel = getIntent().getParcelableExtra("note");
+        if (mNoteModel == null) {
+            mNoteModel = new NoteModel();
+        }
         initUI();
 
     }
@@ -87,11 +94,18 @@ public class NoteEditActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String htmlText = mRichEditor.getHtml();
-                Log.d(TAG, "saveButton onClick: " + htmlText);
+                mNoteModel.setTime(System.currentTimeMillis());
+                mNoteModel.setTitle(titleEdt.getText().toString());
+                mNoteModel.setContent(mRichEditor.getHtml());
+                mNoteModel.setAuther("Me");
+                NoteManager.getInstance().saveOrUpdate(mNoteModel);
+                Intent i = new Intent();
+                setResult(MyNoteFragment.RESULT_OK, i);
+                finish();
             }
         });
 
-
+        titleEdt.setText(mNoteModel.getTitle());
+        mRichEditor.setHtml(mNoteModel.getContent());
     }
 }
