@@ -1,14 +1,14 @@
 package yangfuwei.xhB17121910.Note;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -26,6 +26,7 @@ public class NoteEditActivity extends AppCompatActivity {
     private EditText titleEdt;
     private RichEditor mRichEditor;
     private BottomNavigationViewEx bottomNavigation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,12 +78,19 @@ public class NoteEditActivity extends AppCompatActivity {
                         mRichEditor.insertImage("http://www.1honeywan.com/dachshund/image/7.21/7.21_3_thumb.JPG",
                                 "testImage");
                         break;
-
                 }
                 return false;
             }
         });
 
+        saveButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String htmlText = mRichEditor.getHtml();
+                Log.d(TAG, "saveButton onClick: " + htmlText);
+            }
+        });
 
 
     }

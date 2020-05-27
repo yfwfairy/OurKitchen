@@ -2,6 +2,12 @@ package yangfuwei.xhB17121910.Note.Model;
 
 public class NoteModel {
     private long time;
+    private String title;
+    private String auther;
+    private String imageUrl;
+    private String content;
+    private int importance;
+    private int type;
 
     public NoteModel(long time, String title, String auther, String imageUrl, String content) {
         this.time = time;
@@ -11,10 +17,21 @@ public class NoteModel {
         this.content = content;
     }
 
-    private String title;
-    private String auther;
-    private String imageUrl;
-    private String content;
+    public int getImportance() {
+        return importance;
+    }
+
+    public void setImportance(int importance) {
+        this.importance = importance;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public long getTime() {
         return time;

@@ -12,17 +12,16 @@ public class MyViewPager extends ViewPager {
 
     private boolean canSlide;
 
-    public void setCanSlide(boolean slide) {
-        canSlide = slide;
-    }
-
     public MyViewPager(@NonNull Context context) {
         super(context);
     }
 
-
     public MyViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    public void setCanSlide(boolean slide) {
+        canSlide = slide;
     }
 
     @Override

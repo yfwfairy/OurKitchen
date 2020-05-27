@@ -1,13 +1,12 @@
 package yangfuwei.xhB17121910.Main;
 
+import android.os.Bundle;
+import android.view.Window;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
-import android.os.Bundle;
-import android.view.Window;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -21,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationViewEx bottomTabBar;
 
     MyViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

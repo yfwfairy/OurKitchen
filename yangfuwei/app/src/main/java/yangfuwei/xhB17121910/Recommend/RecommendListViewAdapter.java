@@ -19,7 +19,7 @@ public class RecommendListViewAdapter implements ListAdapter {
     private Context mContext;
     private List<RecommendListModel> articleList;
 
-    public RecommendListViewAdapter(Context _context,List<RecommendListModel> _listModel) {
+    public RecommendListViewAdapter(Context _context, List<RecommendListModel> _listModel) {
         mContext = _context;
         if (_listModel == null) {
             articleList = new ArrayList<>();
@@ -75,7 +75,7 @@ public class RecommendListViewAdapter implements ListAdapter {
             viewHolder = (ViewHolder) view.getTag();
         } else {
             viewHolder = new ViewHolder();
-            view = LayoutInflater.from(mContext).inflate(R.layout.recommend_list_item,null,true);
+            view = LayoutInflater.from(mContext).inflate(R.layout.recommend_list_item, null, true);
             viewHolder.titleTxv = view.findViewById(R.id.title);
             viewHolder.authorTxv = view.findViewById(R.id.author);
             viewHolder.mImageView = view.findViewById(R.id.image);
@@ -86,7 +86,7 @@ public class RecommendListViewAdapter implements ListAdapter {
         if (model != null) {
             viewHolder.titleTxv.setText(model.getTitle());
             viewHolder.authorTxv.setText(model.getAuther());
-            if(model.getImageUrl() != null && model.getImageUrl().length() != 0) {
+            if (model.getImageUrl() != null && model.getImageUrl().length() != 0) {
                 viewHolder.mImageView.setImageURI(Uri.parse(model.getImageUrl()));
             }
             viewHolder.sharedByTxv.setText(model.getSharedByWho());

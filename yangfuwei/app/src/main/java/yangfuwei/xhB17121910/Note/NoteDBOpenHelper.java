@@ -8,8 +8,9 @@ public class NoteDBOpenHelper extends SQLiteOpenHelper {
 
     private final static String DATABASENAME = "note.db";
     private final static int DATABASEVERSION = 2;
+
     public NoteDBOpenHelper(Context context) {
-        super(context,DATABASENAME,null,DATABASEVERSION);
+        super(context, DATABASENAME, null, DATABASEVERSION);
     }
 
     @Override
