@@ -6,9 +6,10 @@
         <item name="colorPrimary">@color/themeColor</item>
         <item name="colorPrimaryDark">#E61B00</item>
         <item name="colorAccent">@color/themeColor</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+
 
     <style name="tabItemText">
         <item name="android:textAllCaps">true</item>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".Note.NoteEditActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,24 +62,23 @@
         android:padding="10dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <EditText
                 android:id="@+id/title_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="15dp"
                 android:hint="标题"
                 android:maxLines="1"
-                android:textStyle="bold"
                 android:background="@color/white"
-                android:textSize="28sp">
+                android:textSize="38sp">
             </EditText>
             <jp.wasabeef.richeditor.RichEditor
                 android:id="@+id/richeditor"
                 android:layout_width="match_parent"
-                android:layout_height="1200dp">
+                android:layout_height="wrap_content">
             </jp.wasabeef.richeditor.RichEditor>
         </LinearLayout>
     </ScrollView>
@@ -87,6 +87,7 @@
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/splitColor"
         android:id="@+id/bottom_nav"
         app:menu="@menu/note_edit_tabs">
     </com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx>

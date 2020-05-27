@@ -43,8 +43,8 @@ public class NoteEditActivity extends AppCompatActivity {
         mRichEditor = findViewById(R.id.richeditor);
         bottomNavigation = findViewById(R.id.bottom_nav);
 
-        mRichEditor.setPlaceholder("请输入");
-        mRichEditor.setEditorFontSize(18);
+        mRichEditor.setEditorFontSize(22);
+        mRichEditor.setEditorHeight(500);
         redoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +69,16 @@ public class NoteEditActivity extends AppCompatActivity {
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Log.d(TAG, "onNavigationItemSelected: " + menuItem.getMenuInfo());
+                switch (menuItem.getItemId()) {
+                    case R.id.tab_checklist:
+                        mRichEditor.setBullets();
+                        break;
+                    case R.id.tab_image:
+                        mRichEditor.insertImage("http://www.1honeywan.com/dachshund/image/7.21/7.21_3_thumb.JPG",
+                                "testImage");
+                        break;
+
+                }
                 return false;
             }
         });
