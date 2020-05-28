@@ -9,10 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.wildma.pictureselector.PictureBean;
+import com.wildma.pictureselector.PictureSelector;
 
 import jp.wasabeef.richeditor.RichEditor;
 import yangfuwei.xhB17121910.Note.Model.NoteModel;
@@ -82,8 +85,7 @@ public class NoteEditActivity extends AppCompatActivity {
                         mRichEditor.setBullets();
                         break;
                     case R.id.tab_image:
-                        mRichEditor.insertImage("http://www.1honeywan.com/dachshund/image/7.21/7.21_3_thumb.JPG",
-                                "testImage");
+                        selectPicture();
                         break;
                 }
                 return false;
@@ -107,5 +109,24 @@ public class NoteEditActivity extends AppCompatActivity {
 
         titleEdt.setText(mNoteModel.getTitle());
         mRichEditor.setHtml(mNoteModel.getContent());
+    }
+
+    public void selectPicture() {
+        PictureSelector.create(NoteEditActivity.this,PictureSelector.SELECT_REQUEST_CODE).
+                selectPicture();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PictureSelector.SELECT_REQUEST_CODE) {
+            if (data != null) {
+                PictureBean pictureBean = data.getParcelableExtra(PictureSelector.PICTURE_RESULT);
+                Log.i(TAG, "是否裁剪: " + pictureBean.isCut());
+                Log.i(TAG, "原图地址: " + pictureBean.getPath());
+                Log.i(TAG, "图片 Uri: " + pictureBean.getUri());
+                mRichEditor.insertImage(String.valueOf(pictureBean.getUri()),pictureBean.getPath());
+            }
+        }
     }
 }
