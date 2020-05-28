@@ -3,7 +3,7 @@
     <item
         android:id="@+id/tab_checklist"
         android:icon="@drawable/checklist"
-        android:checked="false"
+        android:state_checked="false"
         android:title="清单" />
     <item
         android:id="@+id/tab_font"

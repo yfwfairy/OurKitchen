@@ -2,20 +2,48 @@ package yangfuwei.xhB17121910.Note.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 public class NoteModel implements Parcelable {
     private int id = -1;
     private long time;
-    private String title;
+    private String title = "";
     private String auther;
     private String imageUrl;
-    private String content;
+    private String content = "";
     private int importance;
     private int type;
     public NoteModel() {
 
     }
 
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        Log.d("yfw", "equals: " + toString());
+        if (obj instanceof NoteModel) {
+            NoteModel noteModel = (NoteModel)obj;
+            if (noteModel.getTitle().equals(this.title) && noteModel.getContent().equals(content) && noteModel.getImportance() == importance && noteModel.getType() == type) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "NoteModel{" +
+                "id=" + id +
+                ", time=" + time +
+                ", title='" + title + '\'' +
+                ", auther='" + auther + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", content='" + content + '\'' +
+                ", importance=" + importance +
+                ", type=" + type +
+                '}';
+    }
 
     public NoteModel(long time, String title, String auther, String imageUrl, String content) {
         this.time = time;

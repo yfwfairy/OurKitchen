@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         bottomTabBar = findViewById(R.id.bottomTabBar);
-
+        findView();
         mViewPager = findViewById(R.id.viewPager);
         mViewPager.setCanSlide(false);
         mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -53,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bottomTabBar.setupWithViewPager(mViewPager);
+
+    }
+
+    private void findView() {
+        bottomTabBar.enableAnimation(false);
+        bottomTabBar.enableShiftingMode(false);
+        bottomTabBar.enableItemShiftingMode(false);
 
     }
 }

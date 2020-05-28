@@ -1,7 +1,11 @@
 package yangfuwei.xhB17121910.Note;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,21 +14,35 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.Configuration;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UploadManager;
 import com.wildma.pictureselector.PictureBean;
 import com.wildma.pictureselector.PictureSelector;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
 
 import jp.wasabeef.richeditor.RichEditor;
 import yangfuwei.xhB17121910.Note.Model.NoteModel;
 import yangfuwei.xhB17121910.R;
+import yangfuwei.xhB17121910.Utils.BitmapUtils;
+import yangfuwei.xhB17121910.Utils.ParcelableUtils;
+import yangfuwei.xhB17121910.Utils.QiniuUtils;
 
 public class NoteEditActivity extends AppCompatActivity {
 
     private static final String TAG = "NoteEditActivity";
     private NoteModel mNoteModel;
+    private NoteModel fistCreateNote;
     private Button backButton;
     private Button redoButton;
     private Button undoButton;
@@ -33,7 +51,6 @@ public class NoteEditActivity extends AppCompatActivity {
     private RichEditor mRichEditor;
     private BottomNavigationViewEx bottomNavigation;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_edit);
@@ -41,9 +58,11 @@ public class NoteEditActivity extends AppCompatActivity {
         if (mNoteModel == null) {
             mNoteModel = new NoteModel();
         }
+        fistCreateNote = ParcelableUtils.copy(mNoteModel);
         initUI();
 
     }
+
 
     public void initUI() {
         backButton = findViewById(R.id.back);
@@ -73,10 +92,35 @@ public class NoteEditActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                mNoteModel.setTitle(titleEdt.getText().toString());
+                mNoteModel.setContent(mRichEditor.getHtml());
+                if (fistCreateNote.equals(mNoteModel)) {
+                    finish();
+                    return;
+                }
+                Log.d(TAG, "yfw onClick: equals first:" + fistCreateNote.toString() + " current:" + mNoteModel.toString());
+                AlertDialog alertDialog = new AlertDialog.Builder(NoteEditActivity.this)
+                        .setTitle("退出程序")
+                        .setMessage("你还没有保存，是否退出编辑")
+                        .setPositiveButton("退出并保存", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                updateDataBase();
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("放弃编辑", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        }).create();
+                alertDialog.show();
             }
         });
 
+
+ //       bottomNavigation.setSelectedItemId(bottomNavigation.getMenu().getItem(position).getItemId());
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -96,24 +140,29 @@ public class NoteEditActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                mNoteModel.setTime(System.currentTimeMillis());
-                mNoteModel.setTitle(titleEdt.getText().toString());
-                mNoteModel.setContent(mRichEditor.getHtml());
-                mNoteModel.setAuther("Me");
-                NoteManager.getInstance().saveOrUpdate(mNoteModel);
-                Intent i = new Intent();
-                setResult(MyNoteFragment.RESULT_OK, i);
+                updateDataBase();
                 finish();
             }
         });
 
         titleEdt.setText(mNoteModel.getTitle());
         mRichEditor.setHtml(mNoteModel.getContent());
+
+    }
+
+    public void updateDataBase() {
+        mNoteModel.setTime(System.currentTimeMillis());
+        mNoteModel.setTitle(titleEdt.getText().toString());
+        mNoteModel.setContent(mRichEditor.getHtml());
+        mNoteModel.setAuther("Me");
+        NoteManager.getInstance().saveOrUpdate(mNoteModel);
+        Intent i = new Intent();
+        setResult(MyNoteFragment.RESULT_OK, i);
     }
 
     public void selectPicture() {
         PictureSelector.create(NoteEditActivity.this,PictureSelector.SELECT_REQUEST_CODE).
-                selectPicture();
+                selectPicture(true,200,200,1,1);
     }
 
     @Override
@@ -122,10 +171,46 @@ public class NoteEditActivity extends AppCompatActivity {
         if (requestCode == PictureSelector.SELECT_REQUEST_CODE) {
             if (data != null) {
                 PictureBean pictureBean = data.getParcelableExtra(PictureSelector.PICTURE_RESULT);
-                Log.i(TAG, "是否裁剪: " + pictureBean.isCut());
-                Log.i(TAG, "原图地址: " + pictureBean.getPath());
-                Log.i(TAG, "图片 Uri: " + pictureBean.getUri());
-                mRichEditor.insertImage(String.valueOf(pictureBean.getUri()),pictureBean.getPath());
+                if (pictureBean == null) return;
+                String token = QiniuUtils.getToken();
+                Log.d(TAG, "token:" + token);
+                Configuration configuration = QiniuUtils.getDefaultConfigurations();
+                UploadManager uploadManager = new UploadManager(configuration);
+                if (pictureBean.isCut()) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(pictureBean.getPath());
+                    File file = BitmapUtils.compressImage(bitmap);
+                    uploadManager.put(file, null, token, new UpCompletionHandler() {
+                        @Override
+                        public void complete(String key, ResponseInfo info, JSONObject response) {
+                            String url = "";
+                            try {
+                                url = response.getString("key");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            Log.d(TAG, "complete: url:" + url);
+                            url = QiniuUtils.DOMAIN + url;
+                            Log.d(TAG, "complete: url:" + url);
+                            mRichEditor.insertImage(url,url);
+                        }
+                    },null);
+                } else {
+                    uploadManager.put(pictureBean.getPath(), null, token, new UpCompletionHandler() {
+                        @Override
+                        public void complete(String key, ResponseInfo info, JSONObject response) {
+                            String url = "";
+                            try {
+                                url = response.getString("key");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            Log.d(TAG, "complete: url:" + url);
+                            url = QiniuUtils.DOMAIN + url;
+                            Log.d(TAG, "complete: url:" + url);
+                            mRichEditor.insertImage(url,url);
+                        }
+                    },null);
+                }
             }
         }
     }
