@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +94,7 @@ public class NoteListViewAdapter implements ListAdapter {
             viewHolder.titleTxv.setText(model.getTitle());
             viewHolder.timeTxv.setText(DataTimeUtils.stampToDate(String.valueOf(model.getTime())));
             if (model.getImageUrl() != null && model.getImageUrl().length() != 0) {
-                viewHolder.mImageView.setImageURI(Uri.parse(model.getImageUrl()));
+                Glide.with(mContext).load(model.getImageUrl()).into(viewHolder.mImageView);
             }
             NoteType noteType = NoteType.get(model.getType());
             if (noteType != null) {

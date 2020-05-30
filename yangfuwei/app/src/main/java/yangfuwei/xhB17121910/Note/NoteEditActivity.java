@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -220,6 +221,9 @@ public class NoteEditActivity extends AppCompatActivity {
                             url = QiniuUtils.DOMAIN + url;
                             Log.d(TAG, "complete: url:" + url);
                             mRichEditor.insertImage(url,url);
+                            if (TextUtils.isEmpty(mNoteModel.getImageUrl())) {
+                                mNoteModel.setImageUrl(url);
+                            }
                         }
                     },null);
                 } else {
@@ -239,6 +243,9 @@ public class NoteEditActivity extends AppCompatActivity {
                             url = QiniuUtils.DOMAIN + url;
                             Log.d(TAG, "complete: url:" + url);
                             mRichEditor.insertImage(url,url);
+                            if (TextUtils.isEmpty(mNoteModel.getImageUrl())) {
+                                mNoteModel.setImageUrl(url);
+                            }
                         }
                     },null);
                 }
