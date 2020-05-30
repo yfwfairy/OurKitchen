@@ -14,4 +14,12 @@
     <color name="streetColor">#F8EB79</color>
 
 
+    <color name="flatred">#F44336</color>
+    <color name="flatpurper">#9C27B0</color>
+    <color name="flatdarkblue">#3949AB</color>
+    <color name="flatblue">#64B5F6</color>
+    <color name="flatgreen">#7CB342</color>
+    <color name="flatorange">#FBC02D</color>
+
+
 </resources>

@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -58,6 +59,7 @@ public class NoteEditActivity extends AppCompatActivity {
     private Button saveButton;
     private NiceSpinner typeSpinner;
     private TextView timeTxv;
+    private LinearLayout editFontLayout;
     private EditText titleEdt;
     private RichEditor mRichEditor;
     private BottomNavigationViewEx bottomNavigation;
@@ -74,6 +76,38 @@ public class NoteEditActivity extends AppCompatActivity {
 
     }
 
+    public void initEditFontView() {
+        editFontLayout.setVisibility(View.GONE);
+        Button closeButton = editFontLayout.findViewById(R.id.close_edit_button);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editFontLayout.setVisibility(View.GONE);
+            }
+        });
+
+        editFontLayout.findViewById(R.id.bold).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRichEditor.setBold();
+            }
+        });
+
+        editFontLayout.findViewById(R.id.italic).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRichEditor.setItalic();
+            }
+        });
+
+        editFontLayout.findViewById(R.id.underline).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRichEditor.setUnderline();
+            }
+        });
+    }
+
 
     public void initUI() {
         backButton = findViewById(R.id.back);
@@ -85,7 +119,8 @@ public class NoteEditActivity extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.bottom_nav);
         typeSpinner = findViewById(R.id.type_spinner);
         timeTxv = findViewById(R.id.timeTxv);
-
+        editFontLayout = findViewById(R.id.texteditlayout);
+        initEditFontView();
         timeTxv.setText(DataTimeUtils.stampToDate(String.valueOf(mNoteModel.getTime())));
         timeTxv.setTextSize(14);
         typeSpinner.setTextSize(14);
@@ -155,6 +190,9 @@ public class NoteEditActivity extends AppCompatActivity {
                         break;
                     case R.id.tab_image:
                         selectPicture();
+                        break;
+                    case R.id.tab_font:
+                        editFontLayout.setVisibility(View.VISIBLE);
                         break;
                 }
                 return false;

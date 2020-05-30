@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/themeColor</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="buttonStyle">@style/Widget.AppCompat.Button.Borderless</item>
     </style>
 
 
