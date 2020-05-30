@@ -9,4 +9,9 @@
     <color name="white">#ffffff</color>
     <color name="splitColor">#DDDDDD</color>
 
+    <color name="friedColor">#F47F5A</color>
+    <color name="principleColor">#84D1F4</color>
+    <color name="streetColor">#F8EB79</color>
+
+
 </resources>

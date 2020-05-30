@@ -94,6 +94,21 @@ public class NoteListViewAdapter implements ListAdapter {
             if (model.getImageUrl() != null && model.getImageUrl().length() != 0) {
                 viewHolder.mImageView.setImageURI(Uri.parse(model.getImageUrl()));
             }
+            NoteType noteType = NoteType.get(model.getType());
+            if (noteType != null) {
+                View contentView = view.findViewById(R.id.itemlayout);
+                switch (noteType) {
+                    case FRIED:
+                        contentView.setBackgroundResource(R.drawable.layout_round_background_fried);
+                        break;
+                    case PRINCIPLE:
+                        contentView.setBackgroundResource(R.drawable.layout_round_background_principle);
+                        break;
+                    case STREET:
+                        contentView.setBackgroundResource(R.drawable.layout_round_background_street);
+                        break;
+                }
+            }
         }
         return view;
     }

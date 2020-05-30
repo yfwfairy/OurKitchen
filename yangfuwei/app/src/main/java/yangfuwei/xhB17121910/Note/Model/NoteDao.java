@@ -27,6 +27,11 @@ public class NoteDao {
         return mTemplate.query(sql, mCallback);
     }
 
+    public List<NoteModel> findByType(int type) {
+        String sql = "SELECT * FROM " + ColumnContacts.NOTE_TABLE_NAME + " WHERE " + ColumnContacts.NOTE_TYPE_COLUMN + " = ?";
+        return mTemplate.query(sql, mCallback, Integer.toString(type));
+    }
+
     public NoteModel findById(Integer id) {
         String sql = "SELECT * FROM " + ColumnContacts.NOTE_TABLE_NAME + " WHERE " + BaseColumns._ID + " = ?";
         return mTemplate.queryOne(sql, mCallback, Integer.toString(id));

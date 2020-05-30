@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,15 +27,22 @@ import com.qiniu.android.storage.UploadManager;
 import com.wildma.pictureselector.PictureBean;
 import com.wildma.pictureselector.PictureSelector;
 
+import org.angmarch.views.NiceSpinner;
+import org.angmarch.views.OnSpinnerItemSelectedListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import jp.wasabeef.richeditor.RichEditor;
 import yangfuwei.xhB17121910.Note.Model.NoteModel;
 import yangfuwei.xhB17121910.R;
 import yangfuwei.xhB17121910.Utils.BitmapUtils;
+import yangfuwei.xhB17121910.Utils.Constants;
+import yangfuwei.xhB17121910.Utils.DataTimeUtils;
 import yangfuwei.xhB17121910.Utils.ParcelableUtils;
 import yangfuwei.xhB17121910.Utils.QiniuUtils;
 
@@ -47,6 +55,8 @@ public class NoteEditActivity extends AppCompatActivity {
     private Button redoButton;
     private Button undoButton;
     private Button saveButton;
+    private NiceSpinner typeSpinner;
+    private TextView timeTxv;
     private EditText titleEdt;
     private RichEditor mRichEditor;
     private BottomNavigationViewEx bottomNavigation;
@@ -72,7 +82,21 @@ public class NoteEditActivity extends AppCompatActivity {
         titleEdt = findViewById(R.id.title_edittext);
         mRichEditor = findViewById(R.id.richeditor);
         bottomNavigation = findViewById(R.id.bottom_nav);
+        typeSpinner = findViewById(R.id.type_spinner);
+        timeTxv = findViewById(R.id.timeTxv);
 
+        timeTxv.setText(DataTimeUtils.stampToDate(String.valueOf(mNoteModel.getTime())));
+        timeTxv.setTextSize(14);
+        typeSpinner.setTextSize(14);
+        List<String> dataSet = new LinkedList<>(Arrays.asList(NoteType.DEFAULT.getName(),NoteType.FRIED.getName(),NoteType.PRINCIPLE.getName(),NoteType.STREET.getName()));
+        typeSpinner.attachDataSource(dataSet);
+        typeSpinner.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener() {
+            @Override
+            public void onItemSelected(NiceSpinner parent, View view, int position, long id) {
+                mNoteModel.setType(position);
+            }
+        });
+        typeSpinner.setSelectedIndex(mNoteModel.getType());
         mRichEditor.setEditorFontSize(22);
         mRichEditor.setEditorHeight(500);
         redoButton.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +175,6 @@ public class NoteEditActivity extends AppCompatActivity {
     }
 
     public void updateDataBase() {
-        mNoteModel.setTime(System.currentTimeMillis());
         mNoteModel.setTitle(titleEdt.getText().toString());
         mNoteModel.setContent(mRichEditor.getHtml());
         mNoteModel.setAuther("Me");
@@ -162,7 +185,7 @@ public class NoteEditActivity extends AppCompatActivity {
 
     public void selectPicture() {
         PictureSelector.create(NoteEditActivity.this,PictureSelector.SELECT_REQUEST_CODE).
-                selectPicture(true,200,200,1,1);
+                selectPicture(false,1000,1000,1,1);
     }
 
     @Override
@@ -178,10 +201,15 @@ public class NoteEditActivity extends AppCompatActivity {
                 UploadManager uploadManager = new UploadManager(configuration);
                 if (pictureBean.isCut()) {
                     Bitmap bitmap = BitmapFactory.decodeFile(pictureBean.getPath());
+                    if (bitmap == null) {
+                        Log.d(TAG, "onActivityResult: bitmap null");
+                        return;
+                    }
                     File file = BitmapUtils.compressImage(bitmap);
                     uploadManager.put(file, null, token, new UpCompletionHandler() {
                         @Override
                         public void complete(String key, ResponseInfo info, JSONObject response) {
+                            if (response == null) return;
                             String url = "";
                             try {
                                 url = response.getString("key");
@@ -195,9 +223,12 @@ public class NoteEditActivity extends AppCompatActivity {
                         }
                     },null);
                 } else {
-                    uploadManager.put(pictureBean.getPath(), null, token, new UpCompletionHandler() {
+                    Bitmap bitmap = BitmapUtils.getimage(pictureBean.getPath());
+                    File file = BitmapUtils.compressImage(bitmap);
+                    uploadManager.put(file, null, token, new UpCompletionHandler() {
                         @Override
                         public void complete(String key, ResponseInfo info, JSONObject response) {
+                            if (response == null) return;
                             String url = "";
                             try {
                                 url = response.getString("key");

@@ -16,8 +16,9 @@ public class NoteModel implements Parcelable {
     private int importance;
     private int type;
     public NoteModel() {
-
+        time = System.currentTimeMillis();
     }
+
 
     @Override
     public boolean equals(@Nullable Object obj) {

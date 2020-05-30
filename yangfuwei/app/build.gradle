@@ -40,4 +40,5 @@ dependencies {
     implementation 'com.github.wildma:PictureSelector:2.0.0'
     implementation 'com.qiniu:qiniu-android-sdk:7.6.1'
     implementation 'com.qiniu:qiniu-java-sdk:7.2.+'
+    implementation 'com.github.arcadefire:nice-spinner:1.4.4'
 }

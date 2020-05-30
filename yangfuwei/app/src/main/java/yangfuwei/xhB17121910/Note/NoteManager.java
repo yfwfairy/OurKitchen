@@ -30,6 +30,14 @@ public class NoteManager {
         return notes;
     }
 
+    public List<NoteModel> findType(int type) {
+        if (type == 0) {
+            return mNoteDao.findAll();
+        } else {
+            return mNoteDao.findByType(type);
+        }
+    }
+
     public void refreshData() {
         notes = mNoteDao.findAll();
     }
