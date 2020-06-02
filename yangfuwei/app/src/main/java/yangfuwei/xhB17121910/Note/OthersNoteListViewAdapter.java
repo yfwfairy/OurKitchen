@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +89,7 @@ public class OthersNoteListViewAdapter implements ListAdapter {
             viewHolder.titleTxv.setText(model.getTitle());
             viewHolder.authorTxv.setText(model.getAuther());
             if (model.getImageUrl() != null && model.getImageUrl().length() != 0) {
-                viewHolder.mImageView.setImageURI(Uri.parse(model.getImageUrl()));
+                Glide.with(mContext).load(model.getImageUrl()).centerCrop().into(viewHolder.mImageView);
             }
         }
         return view;

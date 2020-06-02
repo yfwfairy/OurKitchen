@@ -5,14 +5,12 @@ public class OthersNoteListModel {
     private String title;
     private String auther;
     private String imageUrl;
-    private String sharedByWho;
 
-    public OthersNoteListModel(long time, String title, String auther, String imageUrl, String sharedByWho) {
+    public OthersNoteListModel(long time, String title, String auther, String imageUrl) {
         this.time = time;
         this.title = title;
         this.auther = auther;
         this.imageUrl = imageUrl;
-        this.sharedByWho = sharedByWho;
     }
 
     public long getTime() {
@@ -45,14 +43,6 @@ public class OthersNoteListModel {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public String getSharedByWho() {
-        return sharedByWho;
-    }
-
-    public void setSharedByWho(String sharedByWho) {
-        this.sharedByWho = sharedByWho;
     }
 
 

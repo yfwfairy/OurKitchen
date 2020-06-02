@@ -35,9 +35,13 @@ public class OthersNoteFragment extends Fragment {
 
     public void initLocalData() {
         articleList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            articleList.add(new OthersNoteListModel(System.currentTimeMillis(), "文章标题" + i, "作者" + i, null, "分享人" + i));
-        }
+        articleList.add(new OthersNoteListModel(System.currentTimeMillis(), "黄金鸡翅", "小杨" , "https://i8.meishichina.com/attachment/recipe/2016/09/01/20160901147269820369413.jpg?x-oss-process=style/p800"));
+        articleList.add(new OthersNoteListModel(System.currentTimeMillis(), "鱼香肉丝", "小孙" , "https://i8.meishichina.com/attachment/recipe/2015/05/04/201505040509d356adb584ab.jpg?x-oss-process=style/p800"));
+        articleList.add(new OthersNoteListModel(System.currentTimeMillis(), "番茄炒蛋", "小孙" , "https://i8.meishichina.com/attachment/recipe/201103/201103011423117.jpg?x-oss-process=style/p800"));
+        articleList.add(new OthersNoteListModel(System.currentTimeMillis(), "土豆炖牛肉", "小杨" , "https://i8.meishichina.com/attachment/recipe/201102/201102181345266.jpg?x-oss-process=style/p800"));
+        articleList.add(new OthersNoteListModel(System.currentTimeMillis(), "香菇油麦菜", "小孙" , "https://i8.meishichina.com/attachment/recipe/2018/07/17/20180717153182590998810885274.jpg?x-oss-process=style/p800"));
+        articleList.add(new OthersNoteListModel(System.currentTimeMillis(), "可乐鸡翅", "小孙" , "https://i8.meishichina.com/attachment/recipe/2014/07/22/20140722221138274796659.jpg?x-oss-process=style/p800"));
+        articleList.add(new OthersNoteListModel(System.currentTimeMillis(), "蒜蓉金针菇", "小杨" , "https://i8.meishichina.com/attachment/recipe/2015/06/12/2015061244050109f7be07d8.jpg?x-oss-process=style/p800"));
     }
 
     @Override
