@@ -109,6 +109,7 @@ public class NoteListViewAdapter implements ListAdapter {
                     case STREET:
                         contentView.setBackgroundResource(R.drawable.layout_round_background_street);
                         break;
+
                 }
             }
         }

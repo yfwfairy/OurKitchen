@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/tab_me"
-        android:icon="@drawable/rec"
+        android:icon="@drawable/my"
         android:checked="true"
         android:title="@string/me_tab" />
     <item
         android:id="@+id/tab_others"
-        android:icon="@drawable/note"
+        android:icon="@drawable/friends"
         android:title="@string/others_tab" />
 </menu>

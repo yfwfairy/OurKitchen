@@ -18,8 +18,9 @@
         android:id="@+id/bottomTabBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/tabs"
-        />
+        app:itemIconTint="@color/selector"
+        app:menu="@menu/tabs"/>
+
 <!--        app:abb_indicatorAppearance="round"-->
 <!--        app:abb_selectedIndex="1"-->
 <!--        app:abb_selectedTabType="icon"-->

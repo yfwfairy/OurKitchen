@@ -1,4 +1,4 @@
-package yangfuwei.xhB17121910.Recommend;
+package yangfuwei.xhB17121910.Note;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -10,19 +10,17 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import yangfuwei.xhB17121910.Recommend.RecommendListModel;
 import yangfuwei.xhB17121910.R;
+import yangfuwei.xhB17121910.Note.OthersNoteListModel;
 
-public class RecommendListViewAdapter implements ListAdapter {
+public class OthersNoteListViewAdapter implements ListAdapter {
     private Context mContext;
-    private List<RecommendListModel> articleList;
+    private List<OthersNoteListModel> articleList;
 
-    public RecommendListViewAdapter(Context _context, List<RecommendListModel> _listModel) {
+    public OthersNoteListViewAdapter(Context _context, List<OthersNoteListModel> _listModel) {
         mContext = _context;
         if (_listModel == null) {
             articleList = new ArrayList<>();
@@ -78,21 +76,19 @@ public class RecommendListViewAdapter implements ListAdapter {
             viewHolder = (ViewHolder) view.getTag();
         } else {
             viewHolder = new ViewHolder();
-            view = LayoutInflater.from(mContext).inflate(R.layout.recommend_list_item, null, true);
+            view = LayoutInflater.from(mContext).inflate(R.layout.others_note_list_item, null, true);
             viewHolder.titleTxv = view.findViewById(R.id.title);
             viewHolder.authorTxv = view.findViewById(R.id.author);
             viewHolder.mImageView = view.findViewById(R.id.image);
-            viewHolder.sharedByTxv = view.findViewById(R.id.sharedByWho);
             view.setTag(viewHolder);
         }
-        RecommendListModel model = articleList.get(i);
+        OthersNoteListModel model = articleList.get(i);
         if (model != null) {
             viewHolder.titleTxv.setText(model.getTitle());
             viewHolder.authorTxv.setText(model.getAuther());
             if (model.getImageUrl() != null && model.getImageUrl().length() != 0) {
-                Glide.with(mContext).load(model.getImageUrl()).centerCrop().into(viewHolder.mImageView);
+                viewHolder.mImageView.setImageURI(Uri.parse(model.getImageUrl()));
             }
-            viewHolder.sharedByTxv.setText(model.getSharedByWho());
         }
         return view;
     }
@@ -115,7 +111,6 @@ public class RecommendListViewAdapter implements ListAdapter {
     private final class ViewHolder {
         public TextView titleTxv;
         public TextView authorTxv;
-        public TextView sharedByTxv;
         public ImageView mImageView;
     }
 }

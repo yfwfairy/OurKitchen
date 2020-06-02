@@ -7,8 +7,8 @@
     <color name="defaultColor">#707070</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
-    <color name="splitColor">#DDDDDD</color>
-
+    <color name="splitColor">#EDEBEB</color>
+    <color name="partColor">#FFEDEBEB</color>
     <color name="friedColor">#F47F5A</color>
     <color name="principleColor">#84D1F4</color>
     <color name="streetColor">#F8EB79</color>
